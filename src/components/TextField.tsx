@@ -20,11 +20,13 @@ export const TextField: React.FC<Props> = ({ title }) => {
 
 export const FlexBoxTextField: React.FC<Props> = ({ title }) => {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Typography>{title}</Typography>
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
         <MuiTextField placeholder="placeholder" />
       </div>
     </div>

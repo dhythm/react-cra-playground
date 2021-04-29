@@ -1,12 +1,13 @@
-import { Grid, Box, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import React from "react";
-import { TextField } from "./TextField";
+import { FlexBoxTextField, TextField } from "./TextField";
 
-export const GridLayout = () => {
+export const GridLayout: React.FC = () => {
   return (
     <Grid container spacing={2}>
+      {/* Having 800 width but being not centered */}
       <Grid item xs={12}>
-        <Box
+        <div
           style={{
             backgroundColor: "grey",
             maxWidth: 800,
@@ -14,34 +15,63 @@ export const GridLayout = () => {
           }}
         >
           <TextField title="title" />
-        </Box>
+        </div>
+      </Grid>
+
+      {/* Not having 800 width and being not centered */}
+      <Grid item container xs={12} style={{ textAlign: "center" }}>
+        <div
+          style={{
+            backgroundColor: "grey",
+            maxWidth: 800,
+          }}
+        >
+          <TextField title="title" />
+        </div>
+      </Grid>
+
+      {/* Being centered but not having 800 width */}
+      <Grid item container xs={12} justify="center">
+        <div
+          style={{
+            backgroundColor: "grey",
+            maxWidth: 800,
+          }}
+        >
+          <TextField title="title" />
+        </div>
+      </Grid>
+
+      <Grid item xs={12}>
+        <div
+          style={{
+            backgroundColor: "grey",
+            maxWidth: 800,
+            textAlign: "center",
+          }}
+        >
+          <FlexBoxTextField title="title" />
+        </div>
       </Grid>
       <Grid item container xs={12} style={{ textAlign: "center" }}>
-        <Box
+        <div
           style={{
             backgroundColor: "grey",
             maxWidth: 800,
-            textAlign: "center",
           }}
         >
-          <TextField title="title" />
-        </Box>
+          <FlexBoxTextField title="title" />
+        </div>
       </Grid>
       <Grid item container xs={12} justify="center">
-        <Box
+        <div
           style={{
             backgroundColor: "grey",
             maxWidth: 800,
-            textAlign: "center",
           }}
         >
-          <TextField title="title" />
-        </Box>
-      </Grid>
-      <Grid item xs={12}>
-        <Box style={{ backgroundColor: "grey", width: 800 }}>
-          <TextField title="title" />
-        </Box>
+          <FlexBoxTextField title="title" />
+        </div>
       </Grid>
     </Grid>
   );
