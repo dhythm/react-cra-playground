@@ -30,10 +30,10 @@ export const GridLayout: React.FC = () => {
         </div>
       </Grid>
 
-      {/* Being centered but not having 800 width */}
       <Grid item container xs={12} justify="center">
         <div
           style={{
+            flexGrow: 1,
             backgroundColor: "grey",
             maxWidth: 800,
           }}
@@ -66,6 +66,7 @@ export const GridLayout: React.FC = () => {
       <Grid item container xs={12} justify="center">
         <div
           style={{
+            flexGrow: 1,
             backgroundColor: "grey",
             maxWidth: 800,
           }}

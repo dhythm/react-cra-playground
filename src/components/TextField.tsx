@@ -20,7 +20,7 @@ export const TextField: React.FC<Props> = ({ title }) => {
 
 export const FlexBoxTextField: React.FC<Props> = ({ title }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexGrow: 1, flexDirection: "column" }}>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Typography>{title}</Typography>
       </div>
