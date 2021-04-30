@@ -22,7 +22,7 @@ export const GridLayout: React.FC = () => {
       <Grid item container xs={12} style={{ textAlign: "center" }}>
         <div
           style={{
-            backgroundColor: "grey",
+            backgroundColor: "yellow",
             maxWidth: 800,
           }}
         >
@@ -34,7 +34,7 @@ export const GridLayout: React.FC = () => {
         <div
           style={{
             flexGrow: 1,
-            backgroundColor: "grey",
+            backgroundColor: "blue",
             maxWidth: 800,
           }}
         >
@@ -56,7 +56,7 @@ export const GridLayout: React.FC = () => {
       <Grid item container xs={12} style={{ textAlign: "center" }}>
         <div
           style={{
-            backgroundColor: "grey",
+            backgroundColor: "yellow",
             maxWidth: 800,
           }}
         >
@@ -67,7 +67,7 @@ export const GridLayout: React.FC = () => {
         <div
           style={{
             flexGrow: 1,
-            backgroundColor: "grey",
+            backgroundColor: "blue",
             maxWidth: 800,
           }}
         >
