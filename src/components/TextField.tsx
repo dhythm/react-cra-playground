@@ -1,18 +1,21 @@
 import { TextField as MuiTextField, Typography } from "@material-ui/core";
-import React from "react";
+import React, { ComponentProps } from "react";
 
-interface Props {
+// interface Props {
+//   title: string;
+// }
+type Props = {
   title: string;
-}
+} & ComponentProps<typeof MuiTextField>;
 
-export const TextField: React.FC<Props> = ({ title }) => {
+export const TextField: React.FC<Props> = ({ title, ...props }) => {
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Typography>{title}</Typography>
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <MuiTextField placeholder="placeholder" />
+        <MuiTextField placeholder="placeholder" {...props} />
       </div>
     </div>
   );
