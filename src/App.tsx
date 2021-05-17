@@ -1,23 +1,22 @@
 import { IconButton, InputAdornment, Paper } from "@material-ui/core";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import React, { useState } from "react";
-import { GridLayout } from "./components/GridLayout";
-import ReactDateTimePicker from "react-datetime-picker";
-import Datetime from "react-datetime";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Datetime from "react-datetime";
+import ReactDateTimePicker from "react-datetime-picker";
 import "react-datetime/css/react-datetime.css";
 import { TextField } from "./components/TextField";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 
 const App: React.FC = () => {
   const [datetime, setDatetime] = useState(new Date());
   return (
     <Paper>
-      <GridLayout />
       <div>
         <ReactDateTimePicker onChange={setDatetime} value={datetime} />
       </div>
       <Datetime
+        timeFormat="HH:mm"
         renderInput={(props) => {
           console.log({ props });
           return (
@@ -39,6 +38,9 @@ const App: React.FC = () => {
       <ReactDatePicker
         selected={datetime}
         onChange={setDatetime}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={1}
         customInput={
           <TextField
             title="date-time"
