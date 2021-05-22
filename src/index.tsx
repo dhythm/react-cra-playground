@@ -1,14 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { SnackbarProvider } from "./components/Snackbar";
+import { StylesProvider } from "./components/StylesProvider";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      root: {
+        borderRadius: 0,
+      },
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StylesProvider>
+      <SnackbarProvider>
+        <MuiThemeProvider theme={theme}>
+          <App />
+        </MuiThemeProvider>
+      </SnackbarProvider>
+    </StylesProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
