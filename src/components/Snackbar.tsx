@@ -8,6 +8,7 @@ export const SnackbarProvider = ({ children }) => {
       autoHideDuration={3000}
       maxSnack={5}
       classes={useStyles()}
+      className={`${useCustomStyles()["my-MuiCollapse-container"]}`}
     >
       {children}
     </NotiSnackbarProvider>
@@ -31,5 +32,13 @@ const useStyles = makeStyles((theme) => ({
   // },
   lessPadding: {
     paddingLeft: 8 * 2,
+  },
+}));
+
+const useCustomStyles = makeStyles((theme) => ({
+  "my-MuiCollapse-container": {
+    pointerEvents: "all",
+    marginTop: "6px",
+    marginBottom: "6px",
   },
 }));
