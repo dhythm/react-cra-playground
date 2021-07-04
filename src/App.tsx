@@ -1,25 +1,8 @@
-import { Button } from "@material-ui/core";
-import { useSnackbar } from "notistack";
 import React from "react";
+import { RichTextEditor } from "./components/RichTextEditor";
 
 const App: React.FC = () => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  return (
-    <div>
-      <Button
-        onClick={() => {
-          enqueueSnackbar("shown!", {
-            persist: true,
-            action: (key) => (
-              <Button onClick={() => closeSnackbar(key)}>close</Button>
-            ),
-          });
-        }}
-      >
-        click me!
-      </Button>
-    </div>
-  );
+  return <RichTextEditor />;
 };
 
 export default App;

@@ -19,13 +19,14 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <StylesProvider>
-      <SnackbarProvider>
+    {/* SnackbarProvider only works well in outside of StylesProvider with generateClassName */}
+    <SnackbarProvider>
+      <StylesProvider>
         <MuiThemeProvider theme={theme}>
           <App />
         </MuiThemeProvider>
-      </SnackbarProvider>
-    </StylesProvider>
+      </StylesProvider>
+    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
