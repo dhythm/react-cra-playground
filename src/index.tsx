@@ -1,30 +1,30 @@
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { SnackbarProvider } from "./components/Snackbar";
 import { StylesProvider } from "./components/StylesProvider";
+import { ThemeProvider } from "./components/ThemeProvider";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
-const theme = createMuiTheme({
-  overrides: {
-    MuiButton: {
-      root: {
-        borderRadius: 0,
-      },
-    },
-  },
-});
+// const theme = createMuiTheme({
+//   overrides: {
+//     MuiButton: {
+//       root: {
+//         borderRadius: 0,
+//       },
+//     },
+//   },
+// });
 
 ReactDOM.render(
   <React.StrictMode>
     {/* SnackbarProvider only works well in outside of StylesProvider with generateClassName */}
     <SnackbarProvider>
       <StylesProvider>
-        <MuiThemeProvider theme={theme}>
+        <ThemeProvider>
           <App />
-        </MuiThemeProvider>
+        </ThemeProvider>
       </StylesProvider>
     </SnackbarProvider>
   </React.StrictMode>,
