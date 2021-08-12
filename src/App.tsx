@@ -1,11 +1,13 @@
+import { DndContext } from "@dnd-kit/core";
 import React from "react";
-import { useTheme } from "styled-components";
-import { RichTextEditor } from "./components/RichTextEditor";
+import { Contents } from "./components/Dnd/Contents";
 
 const App: React.FC = () => {
-  const theme = useTheme();
-  console.log({ theme });
-  return <RichTextEditor />;
+  return (
+    <DndContext>
+      <Contents />
+    </DndContext>
+  );
 };
 
 export default App;
