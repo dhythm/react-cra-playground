@@ -1,6 +1,11 @@
-import { Translate, useDndMonitor, useDraggable } from "@dnd-kit/core";
+import {
+  Translate,
+  UniqueIdentifier,
+  useDndMonitor,
+  useDraggable,
+} from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const defaultCoordinates = {
@@ -8,7 +13,10 @@ const defaultCoordinates = {
   y: 0,
 };
 
-export const Draggable = ({ id, children }) => {
+export const Draggable: FC<{
+  id: UniqueIdentifier;
+  children: React.ReactNode;
+}> = ({ id, children }) => {
   const { attributes, listeners, setNodeRef, isDragging, transform } =
     useDraggable({
       id,
