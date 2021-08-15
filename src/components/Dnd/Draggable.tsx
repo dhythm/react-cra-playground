@@ -1,20 +1,33 @@
-import { useDndMonitor, useDraggable } from "@dnd-kit/core";
+import { Translate, useDndMonitor, useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
+const defaultCoordinates = {
+  x: 0,
+  y: 0,
+};
 
 export const Draggable = ({ id, children }) => {
   const { attributes, listeners, setNodeRef, isDragging, transform } =
     useDraggable({
       id,
     });
+
+  const [{ translate }, setTranslate] = useState<{
+    initialTranslate: Translate;
+    translate: Translate;
+  }>({ initialTranslate: defaultCoordinates, translate: defaultCoordinates });
+  const [initialPosition, setInitialPosition] = useState(defaultCoordinates);
+
   const [scale, setScale] = useState({ scaleX: 1, scaleY: 1 });
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [positionFixed, setPositionFixed] = useState(position);
+  // const [position, setPosition] = useState(defaultCoordinates);
+  // const [positionFixed, setPositionFixed] = useState(position);
 
   const style = {
     transform: CSS.Translate.toString({
-      ...(isDragging ? position : positionFixed),
+      // ...(isDragging ? position : positionFixed),
+      ...translate,
       ...scale,
     }),
   };
@@ -26,31 +39,53 @@ export const Draggable = ({ id, children }) => {
     }
   }, [transform]);
 
+  // https://github.com/clauderic/dnd-kit/blob/ad4a26f1ba9b01ea8f6050bcfc21c12125063dc3/stories/1%20-%20Core/Draggable/1-Draggable.story.tsx#L81
   useDndMonitor({
     onDragStart: ({ active }) => {
       if (active.id !== id) return;
-      // console.log({ debug: "onDragStart", active });
+      setInitialPosition({
+        x: window.scrollX,
+        y: window.scrollY,
+      });
     },
     onDragMove: ({ active, delta }) => {
       if (active.id !== id) return;
-      // console.log({ debug: "onDragMove", active, delta });
-      setPosition({
-        x: positionFixed.x + delta.x,
-        y: positionFixed.y + delta.y,
-      });
+      // setPosition({
+      //   x: positionFixed.x + delta.x,
+      //   y: positionFixed.y + delta.y,
+      // });
+      setTranslate(({ initialTranslate }) => ({
+        initialTranslate,
+        translate: {
+          x: initialTranslate.x + delta.x - initialPosition.x,
+          y: initialTranslate.y + delta.y - initialPosition.y,
+        },
+      }));
     },
     onDragEnd: ({ active, delta }) => {
       if (active.id !== id) return;
       if (delta.x === 0 && delta.y === 0) return;
-      // console.log({ debug: "onDragEnd", active, delta });
-      setPositionFixed((prev) => ({
-        x: prev.x + delta.x,
-        y: prev.y + delta.y,
+      // setPositionFixed((prev) => ({
+      //   x: prev.x + delta.x,
+      //   y: prev.y + delta.y,
+      // }));
+      setTranslate(({ translate }) => {
+        return {
+          translate,
+          initialTranslate: translate,
+        };
+      });
+      setInitialPosition(defaultCoordinates);
+    },
+    onDragCancel: ({ active }) => {
+      if (active.id !== id) return;
+      setTranslate(({ initialTranslate }) => ({
+        translate: initialTranslate,
+        initialTranslate,
       }));
+      setInitialPosition(defaultCoordinates);
     },
   });
-
-  console.log({ ...style, position, positionFixed });
 
   return (
     <div ref={setNodeRef} style={style}>
