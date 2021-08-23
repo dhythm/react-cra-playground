@@ -7,6 +7,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import { FC, ReactNode } from "react";
 
 const activationConstraint = {
@@ -31,5 +32,9 @@ export const DndProvider: FC<{ children: ReactNode }> = ({ children }) => {
     keyboardSensor
   );
 
-  return <DndContext sensors={sensors}>{children}</DndContext>;
+  return (
+    <DndContext sensors={sensors} modifiers={[restrictToWindowEdges]}>
+      {children}
+    </DndContext>
+  );
 };
