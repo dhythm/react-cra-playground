@@ -53,5 +53,5 @@ const Wrapper = styled.div<{ center?: boolean }>`
   ${({ center }) => center && `justify-content: center;`}
 `;
 const DraggableItem = () => {
-  return <Draggable id={id}>Hello, World</Draggable>;
+  return <Draggable id={id}>Droppable</Draggable>;
 };

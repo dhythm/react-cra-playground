@@ -15,8 +15,9 @@ const defaultCoordinates = {
 
 export const Draggable: FC<{
   id: UniqueIdentifier;
-  children: React.ReactNode;
-}> = ({ id, children }) => {
+  header?: React.ReactNode;
+  children?: React.ReactNode;
+}> = ({ id, header, children }) => {
   const { attributes, listeners, setNodeRef, isDragging, transform } =
     useDraggable({
       id,
@@ -29,15 +30,13 @@ export const Draggable: FC<{
   const [initialPosition, setInitialPosition] = useState(defaultCoordinates);
 
   const [scale, setScale] = useState({ scaleX: 1, scaleY: 1 });
-  // const [position, setPosition] = useState(defaultCoordinates);
-  // const [positionFixed, setPositionFixed] = useState(position);
 
   const style = {
     transform: CSS.Translate.toString({
-      // ...(isDragging ? position : positionFixed),
       ...translate,
       ...scale,
     }),
+    width: 200,
   };
 
   useEffect(() => {
@@ -58,10 +57,6 @@ export const Draggable: FC<{
     },
     onDragMove: ({ active, delta }) => {
       if (active.id !== id) return;
-      // setPosition({
-      //   x: positionFixed.x + delta.x,
-      //   y: positionFixed.y + delta.y,
-      // });
       setTranslate(({ initialTranslate }) => ({
         initialTranslate,
         translate: {
@@ -73,10 +68,6 @@ export const Draggable: FC<{
     onDragEnd: ({ active, delta }) => {
       if (active.id !== id) return;
       if (delta.x === 0 && delta.y === 0) return;
-      // setPositionFixed((prev) => ({
-      //   x: prev.x + delta.x,
-      //   y: prev.y + delta.y,
-      // }));
       setTranslate(({ translate }) => {
         return {
           translate,
@@ -98,11 +89,9 @@ export const Draggable: FC<{
   return (
     <div ref={setNodeRef} style={style}>
       <Header {...listeners} {...attributes}>
-        Header
+        {header}
       </Header>
-      <Body>
-        <button>{children}</button>
-      </Body>
+      <Body>{children}</Body>
     </div>
   );
 };
