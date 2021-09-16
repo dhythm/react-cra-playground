@@ -1,8 +1,8 @@
 import React from "react";
-import { MemoisedBehavior } from "./components/MemoisedBehavior";
+import { MemoisedPlayground } from "./components/MemoisedPlayground";
 
 const App: React.FC = () => {
-  return <MemoisedBehavior />;
+  return <MemoisedPlayground />;
 };
 
 export default App;
