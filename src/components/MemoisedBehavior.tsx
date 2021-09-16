@@ -134,26 +134,29 @@ const Layout = () => {
       <Component header={<MemoisedHeader />} footer={<MemoisedFooter />}>
         {/* re-render */}
         {/* <Child /> */}
-        {/* re-render */}
-        <MemoisedForwardRefComponent>
+        {/* <MemoisedForwardRefComponent>
           <MemoisedChild />
-        </MemoisedForwardRefComponent>
-        {/* NOT re-render */}
-        <MemoisedChild />
-        {/* NOT re-render */}
-        <MemoisedNestedForwardRefChild />
-        {/* NOT re-render */}
-        <MemoisedNestedMemoisedForwardRefChild />
-        {/* re-render */}
-        <Wrapper>
+        </MemoisedForwardRefComponent> */}
+        {/* <Wrapper>
           <MemoisedForwardRef>
             <MemoisedChild />
           </MemoisedForwardRef>
-        </Wrapper>
-        {/* re-render for Wrapper but NOT re-render for child */}
-        <Wrapper>
+        </Wrapper> */}
+        {/* <Wrapper>
           <MemoisedNestedForwardRefChild />
-        </Wrapper>
+        </Wrapper> */}
+        <AmbiguousReRenderComponent>
+          <Child />
+        </AmbiguousReRenderComponent>
+        <AmbiguousReRenderComponent>
+          <MemoisedChild />
+        </AmbiguousReRenderComponent>
+
+        {/* NOT re-render */}
+        <MemoisedChild />
+        <MemoisedNestedForwardRefChild />
+        <MemoisedNestedMemoisedForwardRefChild />
+        <ShouldNotReRenderComponent />
       </Component>
       <hr />
       <button
@@ -260,5 +263,25 @@ const MemoisedNestedForwardRefChild = memo(() => {
     <ForwardRefComponent>
       <Child />
     </ForwardRefComponent>
+  );
+});
+
+const ShouldNotReRenderComponent = memo(() => {
+  console.log("render: ShouldNotReRenderComponent");
+  return (
+    <Wrapper>
+      <ForwardRefComponent>
+        <Child />
+      </ForwardRefComponent>
+    </Wrapper>
+  );
+});
+
+const AmbiguousReRenderComponent = memo(({ children }: any) => {
+  console.log("render: AmbiguousReRenderComponent");
+  return (
+    // <Wrapper>
+    <ForwardRefComponent>{children}</ForwardRefComponent>
+    // </Wrapper>
   );
 });
