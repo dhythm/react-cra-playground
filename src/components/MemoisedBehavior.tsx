@@ -145,12 +145,20 @@ const Layout = () => {
         {/* <Wrapper>
           <MemoisedNestedForwardRefChild />
         </Wrapper> */}
-        <AmbiguousReRenderComponent>
+        {/* <AmbiguousReRenderComponent>
           <Child />
-        </AmbiguousReRenderComponent>
-        <AmbiguousReRenderComponent>
+        </AmbiguousReRenderComponent> */}
+        {/* <AmbiguousReRenderComponent>
           <MemoisedChild />
-        </AmbiguousReRenderComponent>
+        </AmbiguousReRenderComponent> */}
+        {/* <MemoisedWrapper>
+          <MemoisedChild />
+        </MemoisedWrapper> */}
+        {/* <MemoisedWrapper
+          header={<MemoisedHeader />}
+          children={<MemoisedChild />}
+        /> */}
+        <MemoisedWrapper header={<MemoisedHeader />} />
 
         {/* NOT re-render */}
         <MemoisedChild />
@@ -247,6 +255,16 @@ const Wrapper = ({ children }) => {
   console.log("render: Wrapper");
   return <div>{children}</div>;
 };
+
+const MemoisedWrapper = memo(({ header, children }: any) => {
+  console.log("render: MemoisedWrapper");
+  return (
+    <div>
+      {header}
+      {children}
+    </div>
+  );
+});
 
 const MemoisedNestedMemoisedForwardRefChild = memo(() => {
   console.log("render: MemoisedNestedMemoisedForwardRefChild");
