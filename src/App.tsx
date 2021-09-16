@@ -1,8 +1,8 @@
 import React from "react";
-import { Contents } from "./components/Dnd/Contents";
+import { MemoisedBehavior } from "./components/MemoisedBehavior";
 
 const App: React.FC = () => {
-  return <Contents />;
+  return <MemoisedBehavior />;
 };
 
 export default App;
