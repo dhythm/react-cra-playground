@@ -16,6 +16,7 @@ const ComponentA = () => {
   const memoisedParams = useMemo(() => params2, [params2]);
   const onClick = () => console.log("hoge");
   const onClickMemoised = useCallback(() => console.log("hoge"), []);
+  const children = useMemo(() => <div>bar</div>, []);
   return (
     <>
       <button onClick={() => setKey(Math.random() * 1000)}>reload A</button>
@@ -30,6 +31,14 @@ const ComponentA = () => {
       {/* <MemoisedComponentE2 onClick={() => console.log("hoge")} /> */}
       {/* <MemoisedComponentE2 onClick={onClick} /> */}
       {/* <MemoisedComponentE2 onClick={onClickMemoised} /> */}
+      {/* <MemoisedComponentF1>bar</MemoisedComponentF1> */}
+      {/* <MemoisedComponentF1>
+        <div>bar</div>
+      </MemoisedComponentF1> */}
+      {/* <MemoisedComponentF1>
+        <MemoisedChild />
+      </MemoisedComponentF1> */}
+      {/* <MemoisedComponentF1>{children}</MemoisedComponentF1> */}
     </>
   );
 };
@@ -115,3 +124,12 @@ const ComponentE2 = ({ onClick }) => {
 };
 
 const MemoisedComponentE2 = memo(ComponentE2);
+
+const ComponentF1 = ({ children }) => {
+  console.log("Component F1");
+  return <div>{children}</div>;
+};
+
+const MemoisedComponentF1 = memo(ComponentF1);
+
+const MemoisedChild = memo(() => <div>bar</div>);
