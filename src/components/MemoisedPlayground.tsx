@@ -16,6 +16,9 @@ const ComponentA = () => {
       <button onClick={() => setKey(Math.random() * 1000)}>reload A</button>
       <ComponentB1 />
       <ComponentB2 />
+      {/* <ComponentE1 params={"hoge"} /> */}
+      {/* <MemoisedComponentE1 params={"hoge"} /> */}
+      {/* <MemoisedComponentE1 params={{ hoge: { foo: "bar" } }} /> */}
     </>
   );
 };
@@ -86,3 +89,11 @@ const ComponentD2 = () => {
     </>
   );
 };
+
+const ComponentE1 = ({ params }) => {
+  console.log("Component E1");
+  console.log({ params });
+  return <></>;
+};
+
+const MemoisedComponentE1 = memo(ComponentE1);
