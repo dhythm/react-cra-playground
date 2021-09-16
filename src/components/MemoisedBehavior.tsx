@@ -120,15 +120,40 @@ const Layout = () => {
         </MemoisedForwardRefComponent>
       </ComponentWithForwardRef> */}
       {/* MemoisedForwardRefComponent is re-rendered */}
-      <Component
+      {/* <Component
         header={
-          <MemoisedForwardRefComponent>
+          <MemoisedForwardRefComponent ref={ref}>
             <MemoisedHeader />
           </MemoisedForwardRefComponent>
         }
         footer={<MemoisedFooter />}
       >
         <MemoisedChild />
+      </Component> */}
+
+      <Component header={<MemoisedHeader />} footer={<MemoisedFooter />}>
+        {/* re-render */}
+        {/* <Child /> */}
+        {/* re-render */}
+        <MemoisedForwardRefComponent>
+          <MemoisedChild />
+        </MemoisedForwardRefComponent>
+        {/* NOT re-render */}
+        <MemoisedChild />
+        {/* NOT re-render */}
+        <MemoisedNestedForwardRefChild />
+        {/* NOT re-render */}
+        <MemoisedNestedMemoisedForwardRefChild />
+        {/* re-render */}
+        <Wrapper>
+          <MemoisedForwardRef>
+            <MemoisedChild />
+          </MemoisedForwardRef>
+        </Wrapper>
+        {/* re-render for Wrapper but NOT re-render for child */}
+        <Wrapper>
+          <MemoisedNestedForwardRefChild />
+        </Wrapper>
       </Component>
       <hr />
       <button
@@ -157,6 +182,7 @@ const ForwardRefComponent = forwardRef<any, any>(({ children }: any, ref) => {
   return <div ref={ref}>{children}</div>;
 });
 
+const MemoisedForwardRef = memo(ForwardRefComponent);
 const MemoisedForwardRefComponent = memo(({ children }: any) => {
   console.log(`render: MemoisedForwardRefComponent`);
   return <ForwardRefComponent>{children}</ForwardRefComponent>;
@@ -212,4 +238,27 @@ const Child = () => {
 const MemoisedChild = memo(() => {
   console.log("render: MemoisedChild");
   return <Child />;
+});
+
+const Wrapper = ({ children }) => {
+  console.log("render: Wrapper");
+  return <div>{children}</div>;
+};
+
+const MemoisedNestedMemoisedForwardRefChild = memo(() => {
+  console.log("render: MemoisedNestedMemoisedForwardRefChild");
+  return (
+    <MemoisedForwardRefComponent>
+      <Child />
+    </MemoisedForwardRefComponent>
+  );
+});
+
+const MemoisedNestedForwardRefChild = memo(() => {
+  console.log("render: MemoisedNestedForwardRefChild");
+  return (
+    <ForwardRefComponent>
+      <Child />
+    </ForwardRefComponent>
+  );
 });
