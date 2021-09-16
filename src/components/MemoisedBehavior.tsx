@@ -1,4 +1,4 @@
-import { forwardRef, memo, useState } from "react";
+import { forwardRef, memo, useMemo, useState } from "react";
 
 export const MemoisedBehavior = () => {
   return (
@@ -37,6 +37,14 @@ const Parallel = () => {
 
 const Nested = () => {
   const [, setKey] = useState(0);
+  const memoised = useMemo(
+    () => (
+      <MemoisedRegularComponent>
+        Memoised Regular Component
+      </MemoisedRegularComponent>
+    ),
+    []
+  );
   return (
     <>
       {/* Both ForwardRef and Regular are re-rendered */}
@@ -65,6 +73,9 @@ const Nested = () => {
           Memoised Regular Component
         </MemoisedRegularComponent>
       </MemoisedForwardRefComponent>
+
+      {/* MemoisedForwardRef is not re-rendered */}
+      <MemoisedForwardRefComponent>{memoised}</MemoisedForwardRefComponent>
       <hr />
       <button
         onClick={() => {
