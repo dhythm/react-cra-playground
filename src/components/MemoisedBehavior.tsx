@@ -3,7 +3,9 @@ import { forwardRef, memo, useMemo, useState } from "react";
 export const MemoisedBehavior = () => {
   return (
     <>
-      <Nested />
+      {/* <Parallel /> */}
+      {/* <Nested /> */}
+      <Layout />
     </>
   );
 };
@@ -88,6 +90,47 @@ const Nested = () => {
   );
 };
 
+const Layout = () => {
+  const [, setKey] = useState(0);
+  return (
+    <>
+      {/* All components are re-rendered */}
+      {/* <Component header={<Header />} footer={<Footer />}>
+        <Child />
+      </Component> */}
+
+      {/* All components are NOT re-rendered */}
+      {/* <Component header={<MemoisedHeader />} footer={<MemoisedFooter />}>
+        <MemoisedChild />
+      </Component> */}
+
+      {/* MemoisedForwardRefComponent is re-rendered */}
+      <Component header={<MemoisedHeader />} footer={<MemoisedFooter />}>
+        <MemoisedForwardRefComponent>
+          <MemoisedChild />
+        </MemoisedForwardRefComponent>
+      </Component>
+      {/* MemoisedForwardRefComponent is re-rendered */}
+      {/* <ComponentWithForwardRef
+        header={<MemoisedHeader />}
+        footer={<MemoisedFooter />}
+      >
+        <MemoisedForwardRefComponent>
+          <MemoisedChild />
+        </MemoisedForwardRefComponent>
+      </ComponentWithForwardRef> */}
+      <hr />
+      <button
+        onClick={() => {
+          setKey(Math.random() * 1000);
+        }}
+      >
+        reload Nested Component
+      </button>
+    </>
+  );
+};
+
 const RegularComponent = ({ children }: any) => {
   console.log(`render: RegularComponent`);
   return <div>{children}</div>;
@@ -106,4 +149,56 @@ const ForwardRefComponent = forwardRef<any, any>(({ children }: any, ref) => {
 const MemoisedForwardRefComponent = memo(({ children }: any) => {
   console.log(`render: MemoisedForwardRefComponent`);
   return <ForwardRefComponent>{children}</ForwardRefComponent>;
+});
+
+const Component = ({ header, footer, children }: any) => {
+  return (
+    <>
+      {header}
+      {children}
+      {footer}
+    </>
+  );
+};
+
+const ComponentWithForwardRef = forwardRef(
+  ({ header, footer, children }: any, ref) => {
+    return (
+      <>
+        {header}
+        {children}
+        {footer}
+      </>
+    );
+  }
+);
+
+const Header = () => {
+  console.log("render: Header");
+  return <div>Header</div>;
+};
+
+const MemoisedHeader = memo(() => {
+  console.log("render: MemoisedHeader");
+  return <Header />;
+});
+
+const Footer = () => {
+  console.log("render: Footer");
+  return <div>Footer</div>;
+};
+
+const MemoisedFooter = memo(() => {
+  console.log("render: MemoisedFooter");
+  return <Footer />;
+});
+
+const Child = () => {
+  console.log("render: Child");
+  return <div>Child</div>;
+};
+
+const MemoisedChild = memo(() => {
+  console.log("render: MemoisedChild");
+  return <Child />;
 });
