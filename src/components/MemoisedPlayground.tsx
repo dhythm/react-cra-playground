@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 
 export const MemoisedPlayground = () => {
   return (
@@ -8,9 +8,14 @@ export const MemoisedPlayground = () => {
   );
 };
 
+const params1 = { a: "b" };
 const ComponentA = () => {
   const [, setKey] = useState(0);
   console.log("Component A");
+  const params2 = { a: "b" };
+  const memoisedParams = useMemo(() => params2, [params2]);
+  const onClick = () => console.log("hoge");
+  const onClickMemoised = useCallback(() => console.log("hoge"), []);
   return (
     <>
       <button onClick={() => setKey(Math.random() * 1000)}>reload A</button>
@@ -18,7 +23,13 @@ const ComponentA = () => {
       <ComponentB2 />
       {/* <ComponentE1 params={"hoge"} /> */}
       {/* <MemoisedComponentE1 params={"hoge"} /> */}
-      {/* <MemoisedComponentE1 params={{ hoge: { foo: "bar" } }} /> */}
+      {/* <MemoisedComponentE1 params={{ a: "b" }} /> */}
+      {/* <MemoisedComponentE1 params={params1} /> */}
+      {/* <MemoisedComponentE1 params={params2} /> */}
+      {/* <MemoisedComponentE1 params={memoisedParams} /> */}
+      {/* <MemoisedComponentE2 onClick={() => console.log("hoge")} /> */}
+      {/* <MemoisedComponentE2 onClick={onClick} /> */}
+      {/* <MemoisedComponentE2 onClick={onClickMemoised} /> */}
     </>
   );
 };
@@ -97,3 +108,10 @@ const ComponentE1 = ({ params }) => {
 };
 
 const MemoisedComponentE1 = memo(ComponentE1);
+
+const ComponentE2 = ({ onClick }) => {
+  console.log("Component E2");
+  return <button onClick={onClick}>click</button>;
+};
+
+const MemoisedComponentE2 = memo(ComponentE2);
