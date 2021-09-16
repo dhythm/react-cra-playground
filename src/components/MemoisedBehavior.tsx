@@ -105,11 +105,11 @@ const Layout = () => {
       </Component> */}
 
       {/* MemoisedForwardRefComponent is re-rendered */}
-      <Component header={<MemoisedHeader />} footer={<MemoisedFooter />}>
+      {/* <Component header={<MemoisedHeader />} footer={<MemoisedFooter />}>
         <MemoisedForwardRefComponent>
           <MemoisedChild />
         </MemoisedForwardRefComponent>
-      </Component>
+      </Component> */}
       {/* MemoisedForwardRefComponent is re-rendered */}
       {/* <ComponentWithForwardRef
         header={<MemoisedHeader />}
@@ -119,6 +119,17 @@ const Layout = () => {
           <MemoisedChild />
         </MemoisedForwardRefComponent>
       </ComponentWithForwardRef> */}
+      {/* MemoisedForwardRefComponent is re-rendered */}
+      <Component
+        header={
+          <MemoisedForwardRefComponent>
+            <MemoisedHeader />
+          </MemoisedForwardRefComponent>
+        }
+        footer={<MemoisedFooter />}
+      >
+        <MemoisedChild />
+      </Component>
       <hr />
       <button
         onClick={() => {
