@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 
 export const MemoisedPlayground = () => {
   return (
@@ -27,6 +27,7 @@ const ComponentB1 = () => {
     <>
       <button onClick={() => setKey(Math.random() * 1000)}>reload B1</button>
       <ComponentC1 />
+      {/* <MemoisedComponentC1 /> */}
       <ComponentC2 />
     </>
   );
@@ -53,6 +54,8 @@ const ComponentC1 = () => {
     </>
   );
 };
+
+const MemoisedComponentC1 = memo(ComponentC1);
 
 const ComponentC2 = () => {
   const [, setKey] = useState(0);
