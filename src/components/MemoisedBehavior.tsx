@@ -1,8 +1,15 @@
 import { forwardRef, memo, useState } from "react";
 
 export const MemoisedBehavior = () => {
-  const [key, setKey] = useState(0);
-  console.log(key);
+  return (
+    <>
+      <Nested />
+    </>
+  );
+};
+
+const Parallel = () => {
+  const [, setKey] = useState(0);
   return (
     <>
       <RegularComponent>Regular Component</RegularComponent>
@@ -22,7 +29,49 @@ export const MemoisedBehavior = () => {
           setKey(Math.random() * 1000);
         }}
       >
-        reload
+        reload Parallel Component
+      </button>
+    </>
+  );
+};
+
+const Nested = () => {
+  const [, setKey] = useState(0);
+  return (
+    <>
+      {/* Both ForwardRef and Regular are re-rendered */}
+      {/* <ForwardRefComponent>
+        <RegularComponent>Regular Component</RegularComponent>
+      </ForwardRefComponent>
+      <hr /> */}
+
+      {/* ForwardRef is re-rendered but MemoisedRegular in not re-rendered */}
+      {/* <ForwardRefComponent>
+        <MemoisedRegularComponent>
+          Memoised Regular Component
+        </MemoisedRegularComponent>
+      </ForwardRefComponent>
+      <hr /> */}
+
+      {/* Both MemoisedForwardRef and Regular are re-rendered */}
+      {/* <MemoisedForwardRefComponent>
+        <RegularComponent>Regular Component</RegularComponent>
+      </MemoisedForwardRefComponent>
+      <hr /> */}
+
+      {/* MemoisedRegular is NOT re-rendered, but fire both MemoisedForwardRef and ForwardRef's console */}
+      <MemoisedForwardRefComponent>
+        <MemoisedRegularComponent>
+          Memoised Regular Component
+        </MemoisedRegularComponent>
+      </MemoisedForwardRefComponent>
+      <hr />
+      <button
+        onClick={() => {
+          setKey(Math.random() * 1000);
+        }}
+      >
+        reload Nested Component
       </button>
     </>
   );
