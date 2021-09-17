@@ -13,7 +13,7 @@ const ComponentA = () => {
   const [, setKey] = useState(0);
   console.log("Component A");
   const params2 = { a: "b" };
-  const memoisedParams = useMemo(() => params2, [params2]);
+  const memoisedParams = useMemo(() => params2, []);
   const onClick = () => console.log("hoge");
   const onClickMemoised = useCallback(() => console.log("hoge"), []);
   const children = useMemo(() => <div>bar</div>, []);
