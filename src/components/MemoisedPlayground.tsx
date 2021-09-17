@@ -1,12 +1,86 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import {
+  Dispatch,
+  memo,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 
 export const MemoisedPlayground = () => {
   return (
     <>
-      <ComponentA />
+      <HooksInspector />
     </>
   );
 };
+
+const useHooks = (): [
+  {
+    key: string;
+  }[],
+  Dispatch<
+    SetStateAction<
+      {
+        key: string;
+      }[]
+    >
+  >
+] => {
+  const [value, setValue] = useState([
+    { key: "foo" },
+    { key: "bar" },
+    { key: "baz" },
+  ]);
+  return [value, setValue];
+};
+const HooksInspector = () => {
+  const [, setKey] = useState(0);
+  const [value] = useHooks();
+  const v1 = ["foo", "bar", "baz"];
+  const v2 = value;
+  const spread = { ...value };
+  const memoised = useMemo(() => value.map((v) => v), [value]);
+  console.log("HooksInspector");
+  return (
+    <>
+      <button onClick={() => setKey(Math.random() * 1000)}>reload A</button>
+
+      {/* It will re-render */}
+      <Memoised name="v1" value={v1} />
+
+      {/* It will NOT re-render */}
+      <Memoised name="v2" value={v2} />
+
+      {/* It will NOT re-render */}
+      <Memoised name="value" value={value} />
+
+      {/* It will re-render */}
+      <Memoised name="spread" value={spread} />
+
+      {/* It will re-render */}
+      <Memoised name="map" value={value.map((v) => v)} />
+
+      {/* It will NOT re-render */}
+      <Memoised name="memoised" value={memoised} />
+
+      {/* It will re-render */}
+      <Memoised name="filter" value={value.filter((_, idx) => idx !== 1)} />
+
+      {/* It will NOT re-render */}
+      {value.map((v) => (
+        <Memoised name={v.key} value={v} />
+      ))}
+    </>
+  );
+};
+
+const Child = (props) => {
+  console.log(props.name);
+  return <div></div>;
+};
+
+const Memoised = memo(Child);
 
 const params1 = { a: "b" };
 const ComponentA = () => {
