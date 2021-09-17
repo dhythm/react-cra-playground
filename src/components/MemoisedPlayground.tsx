@@ -13,7 +13,9 @@ const ComponentA = () => {
   const [, setKey] = useState(0);
   console.log("Component A");
   const params2 = { a: "b" };
-  const memoisedParams = useMemo(() => params2, []);
+  const [params3] = useState({ a: "b" });
+  // const memoisedParams = useMemo(() => params2, []);
+  const memoisedParams = useMemo(() => params3, [params3]);
   const onClick = () => console.log("hoge");
   const onClickMemoised = useCallback(() => console.log("hoge"), []);
   const children = useMemo(() => <div>bar</div>, []);
@@ -27,7 +29,7 @@ const ComponentA = () => {
       {/* <MemoisedComponentE1 params={{ a: "b" }} /> */}
       {/* <MemoisedComponentE1 params={params1} /> */}
       {/* <MemoisedComponentE1 params={params2} /> */}
-      {/* <MemoisedComponentE1 params={memoisedParams} /> */}
+      <MemoisedComponentE1 params={memoisedParams} />
       {/* <MemoisedComponentE2 onClick={() => console.log("hoge")} /> */}
       {/* <MemoisedComponentE2 onClick={onClick} /> */}
       {/* <MemoisedComponentE2 onClick={onClickMemoised} /> */}
