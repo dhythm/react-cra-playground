@@ -14,6 +14,8 @@ const ComponentA = () => {
   console.log("Component A");
   const params2 = { a: "b" };
   const [params3] = useState({ a: "b" });
+  // NOTE:  the second argument `deps` compare by using Object.is
+  //        https://github.com/facebook/react/blob/b0803f255ba639aae5a6bd66d1234d12eb18d972/packages/react-reconciler/src/ReactFiberHooks.new.js#L325
   // const memoisedParams = useMemo(() => params2, []);
   const memoisedParams = useMemo(() => params3, [params3]);
   const onClick = () => console.log("hoge");
