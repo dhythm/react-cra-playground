@@ -1,8 +1,8 @@
 import React from "react";
-import { MemoisedPlayground } from "./components/MemoisedPlayground";
+import { RenderingSurvey } from "./components/RenderingSurvey";
 
 const App: React.FC = () => {
-  return <MemoisedPlayground />;
+  return <RenderingSurvey />;
 };
 
 export default App;
