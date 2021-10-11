@@ -1,8 +1,8 @@
 import React from "react";
-import { RenderingSurvey } from "./components/RenderingSurvey";
+import { MultipleLanguage } from "./components/MultipleLanguage";
 
 const App: React.FC = () => {
-  return <RenderingSurvey />;
+  return <MultipleLanguage />;
 };
 
 export default App;
