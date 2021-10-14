@@ -1,4 +1,5 @@
 {
+  "<0>Hello, world</0>": "<0>Hello, world</0>",
   "ようこそ React と react-i18next へ。": "Welcome to React and react-i18next.",
   "定義していない文字列": "",
   "言語を切り替え": "Change language"

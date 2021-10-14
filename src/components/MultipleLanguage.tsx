@@ -1,6 +1,6 @@
 import i18n from "i18next";
 import { FC, useEffect, useState } from "react";
-import { initReactI18next, useTranslation } from "react-i18next";
+import { initReactI18next, Trans, useTranslation } from "react-i18next";
 import enJson from "../locales/en.json";
 import jaJson from "../locales/ja.json";
 
@@ -34,6 +34,9 @@ export const MultipleLanguage: FC = () => {
       <header>
         <p>{t("ようこそ React と react-i18next へ。")}</p>
         <small>{t("定義していない文字列")}</small>
+        <Trans>
+          <h1>Hello, world</h1>
+        </Trans>
         <div>
           <button onClick={() => setLang(lang === "en" ? "ja" : "en")}>
             {t("言語を切り替え")}
