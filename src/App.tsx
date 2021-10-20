@@ -1,8 +1,8 @@
 import React from "react";
-import { MultipleLanguage } from "./components/MultipleLanguage";
+import { Tiptap } from "./components/Tiptap";
 
 const App: React.FC = () => {
-  return <MultipleLanguage />;
+  return <Tiptap />;
 };
 
 export default App;
