@@ -7,24 +7,45 @@ import {
   useEditor,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useState } from "react";
+import { Rnd } from "react-rnd";
 import "./styles.scss";
 
 const Component = (props) => {
-  const increase = () => {
-    props.updateAttributes({
-      count: props.node.attrs.count + 1,
-    });
-  };
+  const [size, setSize] = useState({ width: 400, height: 200 });
+  //   const increase = () => {
+  //     props.updateAttributes({
+  //       count: props.node.attrs.count + 1,
+  //     });
+  //   };
 
+  //   return (
+  //     <NodeViewWrapper className="react-component">
+  //       <span className="label">React Component</span>
+
+  //       <div className="content">
+  //         <button onClick={increase}>
+  //           This button has been clicked {props.node.attrs.count} times.
+  //         </button>
+  //       </div>
+  //     </NodeViewWrapper>
+  //   );
   return (
-    <NodeViewWrapper className="react-component">
-      <span className="label">React Component</span>
-
-      <div className="content">
-        <button onClick={increase}>
-          This button has been clicked {props.node.attrs.count} times.
-        </button>
-      </div>
+    <NodeViewWrapper style={{ height: size.height, width: size.width }}>
+      <Rnd
+        size={size}
+        onResizeStop={(e, direction, ref, delta, position) => {
+          setSize({
+            width: parseInt(ref.style.width, 10),
+            height: parseInt(ref.style.height, 10),
+          });
+        }}
+      >
+        <img
+          src="https://source.unsplash.com/8xznAGy4HcY/800x400"
+          alt="sample1"
+        />
+      </Rnd>
     </NodeViewWrapper>
   );
 };
