@@ -7,12 +7,13 @@ import {
   useEditor,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import "./styles.scss";
 
 const Component = (props) => {
   const [size, setSize] = useState({ width: 400, height: 200 });
+  const ref = useRef<any>(null);
   //   const increase = () => {
   //     props.updateAttributes({
   //       count: props.node.attrs.count + 1,
@@ -30,18 +31,32 @@ const Component = (props) => {
   //       </div>
   //     </NodeViewWrapper>
   //   );
+  console.log({ ...size });
+  console.log({ ...ref });
+  //   const { width, height } = ref || {};
   return (
-    <NodeViewWrapper style={{ height: size.height, width: size.width }}>
+    <NodeViewWrapper
+      style={{
+        height: ref?.current?.height ?? size.height,
+        width: ref?.current?.width ?? size.width,
+        // height: size.height,
+        // width: size.width,
+        border: "1px solid #ff0000",
+      }}
+    >
       <Rnd
         size={size}
         onResizeStop={(e, direction, ref, delta, position) => {
+          console.log({ ...ref });
           setSize({
             width: parseInt(ref.style.width, 10),
             height: parseInt(ref.style.height, 10),
           });
         }}
+        disableDragging
       >
         <img
+          ref={ref}
           src="https://source.unsplash.com/8xznAGy4HcY/800x400"
           alt="sample1"
         />
