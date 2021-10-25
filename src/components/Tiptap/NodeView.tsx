@@ -41,17 +41,24 @@ const Component = (props) => {
     >
       <Rnd
         size={size}
-        onResizeStop={(e, direction, ref, delta, position) => {
+        onResize={(e, direction, ref, delta, position) => {
           setSize({
             width: parseInt(ref.style.width, 10),
             height: parseInt(ref.style.height, 10),
           });
         }}
+        // onResizeStop={(e, direction, ref, delta, position) => {
+        //   setSize({
+        //     width: parseInt(ref.style.width, 10),
+        //     height: parseInt(ref.style.height, 10),
+        //   });
+        // }}
         disableDragging
       >
         <img
           ref={ref}
-          src="https://source.unsplash.com/8xznAGy4HcY/800x400"
+          //   src="https://source.unsplash.com/8xznAGy4HcY/800x400"
+          src="https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg"
           alt="sample1"
         />
       </Rnd>
