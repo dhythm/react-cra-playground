@@ -7,10 +7,11 @@
   img {
     max-width: 100%;
     height: auto;
+    object-fit: contain;
 
-    &.ProseMirror-selectednode {
-      outline: 3px solid #68cef8;
-    }
+    // &.ProseMirror-selectednode {
+    //   outline: 3px solid #68cef8;
+    // }
   }
 }
 

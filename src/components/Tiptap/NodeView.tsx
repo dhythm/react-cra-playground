@@ -7,13 +7,19 @@ import {
   useEditor,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { Resizable } from "re-resizable";
 import { useRef, useState } from "react";
 import { Rnd } from "react-rnd";
+import styled from "styled-components";
 import "./styles.scss";
 
 const Component = (props) => {
-  const [size, setSize] = useState({ width: 400, height: 200 });
-  const ref = useRef<any>(null);
+  const [size, setSize] = useState<{ width: number; height: number }>({
+    width: 400,
+    height: 200,
+  });
+  const [isResizing, setIsResizing] = useState(false);
+  const imgRef = useRef<any>(null);
   //   const increase = () => {
   //     props.updateAttributes({
   //       count: props.node.attrs.count + 1,
@@ -31,37 +37,87 @@ const Component = (props) => {
   //       </div>
   //     </NodeViewWrapper>
   //   );
+  //   useEffect(() => {
+  //     console.log({ ref });
+  //     if (ref?.current) {
+  //       setSize({
+  //         height: ref.current?.height,
+  //         width: ref.current?.width,
+  //       });
+  //     }
+  //   }, [ref]);
+
   return (
     <NodeViewWrapper
-      className="image-wrapper"
       style={{
-        height: ref?.current?.height ?? size.height,
-        width: ref?.current?.width ?? size.width,
+        display: "flex",
+        justifyContent: "center",
+        height: size.height,
+        width: "100%",
+        border: "1px solid #ff0000",
       }}
     >
-      <Rnd
+      <Resizable
+        style={{
+          border: "1px solid #0000ff",
+        }}
         size={size}
-        onResize={(e, direction, ref, delta, position) => {
+        bounds="parent"
+        enable={{ left: true, right: true }}
+        onResizeStart={() => setIsResizing(true)}
+        onResizeStop={() => setIsResizing(false)}
+        onResize={(e, dir, ref) => {
           setSize({
             width: parseInt(ref.style.width, 10),
-            height: parseInt(ref.style.height, 10),
+            height:
+              (parseInt(ref.style.width, 10) * imgRef.current.naturalHeight) /
+              imgRef.current.naturalWidth,
           });
         }}
-        // onResizeStop={(e, direction, ref, delta, position) => {
-        //   setSize({
-        //     width: parseInt(ref.style.width, 10),
-        //     height: parseInt(ref.style.height, 10),
-        //   });
-        // }}
-        disableDragging
       >
         <img
-          ref={ref}
+          ref={imgRef}
           //   src="https://source.unsplash.com/8xznAGy4HcY/800x400"
           src="https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg"
           alt="sample1"
         />
-      </Rnd>
+      </Resizable>
+    </NodeViewWrapper>
+  );
+  return (
+    <NodeViewWrapper
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: size.height,
+        width: "100%",
+        border: "1px solid #ff0000",
+      }}
+    >
+      <StyledRnd
+        size={size}
+        enableResizing={{ left: true, right: true }}
+        onResizeStart={() => setIsResizing(true)}
+        onResizeEnd={() => setIsResizing(false)}
+        onResize={(e, direction, ref, delta, position) => {
+          console.log({ ref });
+          setSize({
+            width: parseInt(ref.style.width, 10),
+            height:
+              (parseInt(ref.style.width, 10) * imgRef.current.naturalHeight) /
+              imgRef.current.naturalWidth,
+          });
+        }}
+        disableDragging
+      >
+        <img
+          ref={imgRef}
+          //   src="https://source.unsplash.com/8xznAGy4HcY/800x400"
+          src="https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg"
+          alt="sample1"
+        />
+      </StyledRnd>
     </NodeViewWrapper>
   );
 };
@@ -114,3 +170,10 @@ export const NodeView = () => {
 
   return <EditorContent editor={editor} />;
 };
+
+const StyledRnd = styled(Rnd)`
+  &:hover {
+    outline: 3px solid #68cef8;
+  }
+  cursor: ew-resize;
+`;
