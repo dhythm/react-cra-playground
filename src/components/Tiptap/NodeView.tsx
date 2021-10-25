@@ -31,23 +31,17 @@ const Component = (props) => {
   //       </div>
   //     </NodeViewWrapper>
   //   );
-  console.log({ ...size });
-  console.log({ ...ref });
-  //   const { width, height } = ref || {};
   return (
     <NodeViewWrapper
+      className="image-wrapper"
       style={{
         height: ref?.current?.height ?? size.height,
         width: ref?.current?.width ?? size.width,
-        // height: size.height,
-        // width: size.width,
-        border: "1px solid #ff0000",
       }}
     >
       <Rnd
         size={size}
         onResizeStop={(e, direction, ref, delta, position) => {
-          console.log({ ...ref });
           setSize({
             width: parseInt(ref.style.width, 10),
             height: parseInt(ref.style.height, 10),
