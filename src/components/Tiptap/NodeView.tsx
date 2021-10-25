@@ -8,7 +8,7 @@ import {
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Resizable } from "re-resizable";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import styled from "styled-components";
 import "./styles.scss";
@@ -19,14 +19,8 @@ const Component = (props) => {
     height: 200,
   });
   const imgRef = useRef<any>(null);
-  useEffect(() => {
-    console.log(size.height);
-    console.log({ imgRef: imgRef?.current });
-    console.log(imgRef?.current?.clientHeight);
-    if (imgRef?.current?.height) {
-    }
-  }, [imgRef?.current?.height, size.height]);
 
+  console.log({ ...size });
   return (
     <NodeViewWrapper
       style={{
@@ -61,6 +55,16 @@ const Component = (props) => {
           //   src="https://source.unsplash.com/8xznAGy4HcY/800x400"
           src="https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg"
           alt="sample1"
+          onLoad={() => {
+            console.log({ img: imgRef.current });
+            setSize({
+              width: parseInt(imgRef.current.style.width, 10),
+              height:
+                (parseInt(imgRef.current.style.width, 10) *
+                  imgRef.current.naturalHeight) /
+                imgRef.current.naturalWidth,
+            });
+          }}
         />
       </Resizable>
     </NodeViewWrapper>
