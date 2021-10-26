@@ -9,6 +9,8 @@ import {
 import StarterKit from "@tiptap/starter-kit";
 import { Resizable } from "re-resizable";
 import { useRef, useState } from "react";
+import { useHover } from "react-use";
+import styled from "styled-components";
 import "./styles.scss";
 
 const Component = (props) => {
@@ -19,20 +21,9 @@ const Component = (props) => {
   const imgRef = useRef<any>(null);
   const imgUrl = props.node.attrs.imgUrl;
 
-  return (
-    <NodeViewWrapper
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        height: size.height,
-        width: "100%",
-        border: "1px solid #ff0000",
-      }}
-    >
+  const [hoverableImage, isHovering] = useHover(() => {
+    return (
       <Resizable
-        style={{
-          border: "1px solid #0000ff",
-        }}
         size={size}
         bounds="parent"
         enable={{ left: true, right: true }}
@@ -44,6 +35,7 @@ const Component = (props) => {
               imgRef.current.naturalWidth,
           });
         }}
+        minWidth={36}
       >
         <img
           ref={imgRef}
@@ -65,6 +57,30 @@ const Component = (props) => {
           }}
         />
       </Resizable>
+    );
+  });
+
+  return (
+    <NodeViewWrapper
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        height: size.height,
+        width: "100%",
+        border: "1px solid #ff0000",
+      }}
+    >
+      {hoverableImage}
+      {isHovering && (
+        <ImageMask
+          style={{
+            width: size.width,
+          }}
+        >
+          <StyledResizeImageIconLeft />
+          <StyledResizeImageIconRight />
+        </ImageMask>
+      )}
     </NodeViewWrapper>
   );
 };
@@ -113,13 +129,7 @@ export const NodeView = () => {
       //   setImgUrl(url);
       editor!.commands.setContent(
         `
-    <p>
-      This is still the text editor you’re used to, but enriched with node views.
-    </p>
     <react-component imgUrl="${url}"></react-component>
-    <p>
-      Did you see that? That’s a React component. We are really living in the future.
-    </p>
     `
       );
     }
@@ -129,13 +139,7 @@ export const NodeView = () => {
   const editor = useEditor({
     extensions: [StarterKit, ReactComponent],
     content: `
-    <p>
-      This is still the text editor you’re used to, but enriched with node views.
-    </p>
     <react-component imgUrl="${imgUrl}"></react-component>
-    <p>
-      Did you see that? That’s a React component. We are really living in the future.
-    </p>
     `,
   });
 
@@ -146,3 +150,33 @@ export const NodeView = () => {
     </div>
   );
 };
+
+const ImageMask = styled.div`
+  background-color: #00000066;
+  min-width: 36px;
+  max-width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  pointer-events: none;
+`;
+
+const ResizeImageIcon = styled.div`
+  border-radius: 3px;
+  max-height: 20px;
+  min-height: 10px;
+  width: 5px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+`;
+
+const StyledResizeImageIconLeft = styled(ResizeImageIcon)`
+  left: 4px;
+`;
+
+const StyledResizeImageIconRight = styled(ResizeImageIcon)`
+  right: 4px;
+`;
