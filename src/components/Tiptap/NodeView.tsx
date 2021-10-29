@@ -63,6 +63,7 @@ const Component = (props) => {
   return (
     <NodeViewWrapper
       style={{
+        position: "relative",
         display: "flex",
         justifyContent: "center",
         height: size.height,
