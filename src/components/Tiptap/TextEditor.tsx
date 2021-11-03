@@ -1,22 +1,11 @@
-import Placeholder from "@tiptap/extension-placeholder";
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import "./styles.scss";
+import Document from "@tiptap/extension-document";
+import { Editor, EditorContent } from "@tiptap/react";
+import { VFC } from "react";
 
-export const TextEditor = () => {
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Placeholder.configure({
-        placeholder: "Write something...",
-        showOnlyWhenEditable: false,
-        showOnlyCurrent: false,
-      }),
-    ],
-    content: `
-    <p>foo bar baz</p>
-    `,
-  });
+export const CustomDocument = Document.extend({
+  content: "heading block*",
+});
 
+export const TextEditor: VFC<{ editor: Editor }> = ({ editor }) => {
   return <EditorContent editor={editor} />;
 };

@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { TextEditor } from "./TextEditor";
+import { Editor } from "./Editor";
 
 export const Tiptap = () => {
-  // return <ImageView />
-  // return <NodeView />;
   return (
     <EditorContainer>
-      <TextEditor />
+      <Editor />
     </EditorContainer>
   );
 };

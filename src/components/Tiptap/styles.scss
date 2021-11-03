@@ -5,17 +5,28 @@
   }
 
   padding: 8px;
-  p {
-    margin-top: 0;
-    margin-bottom: 0;
+  p,
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    line-height: 1.5;
   }
-  .is-empty::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: #ced4da;
-    pointer-events: none;
-    height: 0;
-  }
+
+  // p.is-editor-empty:first-child::before {
+  //   content: attr(data-placeholder);
+  //   float: left;
+  //   color: #adb5bd;
+  //   pointer-events: none;
+  //   height: 0;
+  // }
+  // .is-empty::before {
+  //   content: attr(data-placeholder);
+  //   float: left;
+  //   color: #ced4da;
+  //   pointer-events: none;
+  //   height: 0;
+  // }
 
   img {
     max-width: 100%;
@@ -28,13 +39,20 @@
   }
 }
 
-// .ProseMirror .is-empty::before {
-//   content: attr(data-placeholder);
-//   float: left;
-//   color: #ced4da;
-//   pointer-events: none;
-//   height: 0;
-// }
+.ProseMirror .is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #ced4da;
+  pointer-events: none;
+  height: 0;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+}
 
 .react-component {
   background: #faf594;

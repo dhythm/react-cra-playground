@@ -1,17 +1,15 @@
 import { Node } from "@tiptap/core";
 import {
+  Editor,
   EditorContent,
   mergeAttributes,
   NodeViewWrapper,
   ReactNodeViewRenderer,
-  useEditor,
 } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import { Resizable } from "re-resizable";
-import { useRef, useState } from "react";
+import { useRef, useState, VFC } from "react";
 import { useHover } from "react-use";
 import styled from "styled-components";
-import "./styles.scss";
 
 const Component = (props) => {
   const [size, setSize] = useState<{ width: number; height: number }>({
@@ -86,7 +84,7 @@ const Component = (props) => {
   );
 };
 
-const ReactComponent = Node.create({
+export const ReactComponent = Node.create({
   name: "reactComponent",
 
   group: "block",
@@ -118,7 +116,7 @@ const ReactComponent = Node.create({
   },
 });
 
-export const NodeView = () => {
+export const NodeView: VFC<{ editor: Editor }> = ({ editor }) => {
   const [imgUrl, setImgUrl] = useState(
     "https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg"
   );
@@ -137,12 +135,12 @@ export const NodeView = () => {
   };
 
   console.log({ imgUrl });
-  const editor = useEditor({
-    extensions: [StarterKit, ReactComponent],
-    content: `
-    <react-component imgUrl="${imgUrl}"></react-component>
-    `,
-  });
+  // const editor = useEditor({
+  //   extensions: [StarterKit, ReactComponent],
+  //   content: `
+  //   <react-component imgUrl="${imgUrl}"></react-component>
+  //   `,
+  // });
 
   return (
     <div>

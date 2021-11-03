@@ -16,6 +16,7 @@
     "@tiptap/extension-character-count": "^2.0.0-beta.13",
     "@tiptap/extension-collaboration": "^2.0.0-beta.25",
     "@tiptap/extension-collaboration-cursor": "^2.0.0-beta.25",
+    "@tiptap/extension-document": "^2.0.0-beta.13",
     "@tiptap/extension-highlight": "^2.0.0-beta.25",
     "@tiptap/extension-image": "^2.0.0-beta.19",
     "@tiptap/extension-placeholder": "^2.0.0-beta.38",
