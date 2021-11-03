@@ -1,8 +1,8 @@
 import React from "react";
-import { TailwindCssSample } from "./components/TailwindCssSample";
+import { Tiptap } from "./components/Tiptap";
 
 const App: React.FC = () => {
-  return <TailwindCssSample />;
+  return <Tiptap />;
 };
 
 export default App;

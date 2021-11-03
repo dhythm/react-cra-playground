@@ -143,6 +143,8 @@ const EditorContainer = styled.div`
   padding: 8px;
   border: 1px solid #000;
   border-radius: 4px;
+  min-width: 300px;
+  max-width: 500px;
 `;
 
 const Toolbar = styled.div`

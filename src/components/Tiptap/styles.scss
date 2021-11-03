@@ -4,6 +4,19 @@
     margin-top: 0.75em;
   }
 
+  padding: 8px;
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .is-empty::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #ced4da;
+    pointer-events: none;
+    height: 0;
+  }
+
   img {
     max-width: 100%;
     height: auto;
@@ -14,6 +27,14 @@
     // }
   }
 }
+
+// .ProseMirror .is-empty::before {
+//   content: attr(data-placeholder);
+//   float: left;
+//   color: #ced4da;
+//   pointer-events: none;
+//   height: 0;
+// }
 
 .react-component {
   background: #faf594;
