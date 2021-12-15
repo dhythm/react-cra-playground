@@ -32,6 +32,13 @@ export const I18nNested: VFC = () => {
         </Wrapper2>
       </Wrapper1>
 
+      {/* foo */}
+      <Wrapper1>
+        <Wrapper4>
+          <Content />
+        </Wrapper4>
+      </Wrapper1>
+
       {/* raw */}
       <RawContent />
 
@@ -118,6 +125,24 @@ const Wrapper3: FC = ({ children }) => {
     const instance = i18next.createInstance();
     instance.use(initReactI18next).init({
       resources: { en: { translation: { foo: "hoge" } } },
+      lng: "en",
+      fallbackLng: false,
+      keySeparator: false,
+      returnEmptyString: false,
+      interpolation: {
+        escapeValue: false,
+      },
+    });
+    return instance;
+  }, []);
+  return <I18nextProvider i18n={i18nextInstance}>{children}</I18nextProvider>;
+};
+
+const Wrapper4: FC = ({ children }) => {
+  const i18nextInstance = useMemo(() => {
+    const instance = i18next.createInstance();
+    instance.use(initReactI18next).init({
+      resources: { en: { translation: { bar: "bar" } } },
       lng: "en",
       fallbackLng: false,
       keySeparator: false,
