@@ -21,17 +21,18 @@ i18next.use(initReactI18next).init({
   },
 });
 
+// i18next.addResources("en", "common", { baz: "qux", quux: "corge" });
+//   i18next.addResources("en", "common", {
+//     foo: "hoge",
+//     baz: "qux",
+//     quux: "corge",
+//   });
+//   i18next.addResources("en", "common", en1);
+i18next.addResources("en", "common", en2); // "baz": "qux"
+i18next.addResources("en", "common", en3); // "foo": "bar", "quux": "corge"
+i18next.addResources("en", "common", en1); // "foo": "hoge"
+
 const Wrapper: FC = ({ children }) => {
-  // i18next.addResources("en", "common", { baz: "qux", quux: "corge" });
-  //   i18next.addResources("en", "common", {
-  //     foo: "hoge",
-  //     baz: "qux",
-  //     quux: "corge",
-  //   });
-  //   i18next.addResources("en", "common", en1);
-  i18next.addResources("en", "common", en2);
-  i18next.addResources("en", "common", en3);
-  i18next.addResources("en", "common", en1);
   return <I18nextProvider i18n={i18next}>{children}</I18nextProvider>;
 };
 
