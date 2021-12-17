@@ -1,13 +1,10 @@
 import React from "react";
-import { I18nImported } from "./components/I18nImported";
-import { I18nNested } from "./components/I18nNested";
+import { I18nAddResources } from "./components/I18n/I18nAddResources";
 
 const App: React.FC = () => {
   return (
     <>
-      <I18nNested />
-      <hr />
-      <I18nImported />
+      <I18nAddResources />
     </>
   );
 };
