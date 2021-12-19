@@ -16,7 +16,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": ["./@types", "node_modules/@types"]
+    "typeRoots": ["./@types", "node_modules/@types"],
+    "paths": {
+      "@assets": ["./src/assets/index.ts"]
+    }
   },
   "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "**/__tests__/**/*.ts", "**/__tests__/**/*.tsx"]
