@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,11 +20,19 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": ["./@types", "node_modules/@types"],
-    "paths": {
-      "@assets": ["./src/assets/index.ts"]
-    }
+    "typeRoots": [
+      "./@types",
+      "node_modules/@types"
+    ]
   },
-  "include": ["src", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "**/__tests__/**/*.ts", "**/__tests__/**/*.tsx"]
+  "include": [
+    "src",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/**/*.ts",
+    "**/__tests__/**/*.tsx"
+  ]
 }
