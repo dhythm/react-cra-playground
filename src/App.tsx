@@ -1,10 +1,10 @@
 import React from "react";
-import { I18nAddResources } from "./components/I18n/I18nAddResources";
+import { ScrollableDrag } from "./components/ScrollableDrag";
 
 const App: React.FC = () => {
   return (
     <>
-      <I18nAddResources />
+      <ScrollableDrag />
     </>
   );
 };

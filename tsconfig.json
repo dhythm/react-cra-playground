@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -23,7 +24,8 @@
     "typeRoots": [
       "./@types",
       "node_modules/@types"
-    ]
+    ],
+    "baseUrl": "src"
   },
   "include": [
     "src",
@@ -33,6 +35,7 @@
   "exclude": [
     "node_modules",
     "**/__tests__/**/*.ts",
-    "**/__tests__/**/*.tsx"
+    "**/__tests__/**/*.tsx",
+    "./src/components/Jest/*.tsx"
   ]
 }
