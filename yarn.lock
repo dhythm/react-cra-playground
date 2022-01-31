@@ -2872,6 +2872,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-inner-image-zoom@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-inner-image-zoom/-/react-inner-image-zoom-2.0.1.tgz#4b723d44c5529d64b11b569fc3dcf1b3db51b9fc"
+  integrity sha512-pADorue3ZydfJOEpe3FJUs2Tc4iz5RByQ+H+N0IRLUYtUWOJ5TyfujJJiXU5xdHyD0GruqBl7fRev6cWJWkZeA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-test-renderer@>=16.9.0":
   version "17.0.1"
   resolved "https://registry.npmjs.org/@types/react-test-renderer/-/react-test-renderer-17.0.1.tgz"
@@ -11865,6 +11872,11 @@ react-indiana-drag-scroll@^2.1.0:
     classnames "^2.2.6"
     debounce "^1.2.0"
     easy-bem "^1.1.1"
+
+react-inner-image-zoom@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-inner-image-zoom/-/react-inner-image-zoom-3.0.0.tgz#507e00ec0c190951a5a5c7261a36ca059d99f717"
+  integrity sha512-5Xda9xUGAaPHIMpw1hQ66dIXAQfylCgxiEgzcCy0Jy0T/RrMgzIOiBD3ls8R83rTu8cLwZ7jDCtt8xbguQD3OQ==
 
 react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"

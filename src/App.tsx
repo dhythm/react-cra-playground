@@ -1,12 +1,8 @@
+import { ReactInnerImageZoom } from "components/ReactInnerImageZoom";
 import React from "react";
-import { ScrollableDrag } from "./components/ScrollableDrag";
 
 const App: React.FC = () => {
-  return (
-    <>
-      <ScrollableDrag />
-    </>
-  );
+  return <ReactInnerImageZoom />;
 };
 
 export default App;
