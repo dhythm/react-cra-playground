@@ -1,8 +1,8 @@
-import { ReactInnerImageZoom } from "components/ReactInnerImageZoom";
+import { Pdf } from "components/Pdf";
 import React from "react";
 
 const App: React.FC = () => {
-  return <ReactInnerImageZoom />;
+  return <Pdf />;
 };
 
 export default App;
